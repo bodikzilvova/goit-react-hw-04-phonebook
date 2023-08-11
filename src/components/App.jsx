@@ -6,8 +6,8 @@ import { Filter } from './Filter/Filter';
 import { nanoid } from 'nanoid';
 
 export const App = () => {
-  const storedContacts = JSON.parse(localStorage.getItem('contacts')) || [];
-  const [contacts, setContacts] = useState(storedContacts);
+
+  const [contacts, setContacts] = useState(()=> JSON.parse(localStorage.getItem('contacts')) || []);
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export const App = () => {
         number: number,
       };
 
-      setContacts([...contacts, newContact]);
+      setContacts(prevContacts => [...prevContacts, newContact]);
     }
   };
 
